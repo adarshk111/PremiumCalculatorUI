@@ -18,10 +18,10 @@ export class OccupationService {
     const occupationList : string[] = [  
         'Cleaner', 'Doctor', 'Author', 'Farmer', 'Mechanic', 'Florist'
     ]
-    return this.http.get<string[]>(this.baseUrl + "/api/Occupation")
+    return this.http.get<string[]>(this.baseUrl + "/api/Occupation/GetOccupationList")
   }
 
   GetCalculatedPremium(userdetails : UserForm) : Observable<number>{
-    return this.http.post<number>(this.baseUrl + "/api/GetPremium", JSON.stringify(userdetails),{headers : this._headers, responseType : 'json'})
+    return this.http.post<number>(this.baseUrl + "/api/Occupation/GetPremium", JSON.stringify(userdetails),{headers : this._headers, responseType : 'json'})
   }
 }
