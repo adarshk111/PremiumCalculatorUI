@@ -26,14 +26,14 @@ export class UserInputFormComponent implements OnInit {
       occupation : new FormControl('', Validators.required),
       sumAssured: new FormControl('', [Validators.required])
     });
-    this.occupationList = ['Cleaner', 'Doctor', 'Author', 'Farmer', 'Mechanic', 'Florist']
-       /*this.occupationService.getOccupationList().subscribe(
+    
+       this.occupationService.getOccupationList().subscribe(
          oc=>
          {
            this.occupationList = oc
          }
    
-       )*/ 
+       )
      }
 
      public hasError = (controlName: string, errorName: string) =>{
@@ -53,13 +53,10 @@ export class UserInputFormComponent implements OnInit {
         sumAssured: userFormValue.sumAssured,
         occupation : userFormValue.occupation
       }
-      
-      if(user.occupation == 'Cleaner')
-      this.premiumAmount = 1234
-      if(user.occupation == 'Doctor')
-      this.premiumAmount = 5456
-
-      this.isPremiumAvailable = true
+      this.occupationService.GetCalculatedPremium(user).subscribe(premium => {
+        this.premiumAmount = premium
+        this.isPremiumAvailable = true
+      })
     }
 
 
